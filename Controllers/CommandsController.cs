@@ -26,12 +26,16 @@ namespace Commander.Controllers
             return Ok(commandItems);
         }
 
-        //GET api/commands{id}
+        //GET api/commands/{id}
         [HttpGet("{id}")]
         public ActionResult <Command> GetCommandById(int id)
         {
             var commandItem = _repository.GetCommandById(id);
-            return Ok(commandItem);
+            if(commandItem != null)
+            {
+                return Ok(commandItem);
+            }
+            return NotFound();
         }
     }
 }
